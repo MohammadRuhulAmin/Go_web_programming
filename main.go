@@ -8,6 +8,8 @@ import (
 func handlerFunc(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html") // text/plain
 	fmt.Fprint(w, "<h1>Welcome to___ my super Awesome Tutorial</h1>")
+	fmt.Println(r.URL.Path)
+	fmt.Fprint(w,"<p>Email Us : </p> <a href=\"facebook.com\" >Contact</a>  ") // linking ..a page 
 }
 
 func main() {
