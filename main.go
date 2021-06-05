@@ -1,22 +1,18 @@
 package main
 
 import (
-	"flag"
+	"fmt"
 	"net/http"
-	"log"
 )
 
-func main(){
-	
-	port := flag.String("p","8000","port")
-	dir := flag.String("d",".","dir")
-	flag.Parse()
-	http.Handle("/",http.FileServer(http.Dir(*dir)))
-	log.Printf("Serving %s on Http port : %s",*dir,*port)
-	log.Fatal(http.ListenAndServe(":"+*port,nil))
+func handlerFunc(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "<h1>Welcome to my Tutorial</h1>")
+}
 
+func main() {
 
-
-
+	http.HandleFunc("/", handlerFunc)
+	http.ListenAndServe(":3000", nil)
 
 }
+
