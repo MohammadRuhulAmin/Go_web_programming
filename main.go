@@ -2,7 +2,8 @@ package main // project should start from here!
 
 import (
 	"fmt"
-	"net/http" // these are packages ! creating web server , handling web request and so on!
+	"net/http" // these are packages ! creating web server , handling web request and so on! 
+	"github.com/gorilla/mux"
 )
 
 func handlerFunc(w http.ResponseWriter, r *http.Request) {
@@ -12,6 +13,7 @@ func handlerFunc(w http.ResponseWriter, r *http.Request) {
 	} else if r.URL.Path == "/Contact" {
 		fmt.Fprint(w, "<p>Email Us : </p> <a href=\"facebook.com\" >Contact</a>  ") // linking ..a page
 	} else {
+
 		w.WriteHeader(http.StatusNotFound) 
 		fmt.Fprint(w, "<h3>Bad Request !</h3>")
 	}
@@ -19,8 +21,8 @@ func handlerFunc(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	mux := &http.ServeMux{}
-	mux.HandleFunc("/", handlerFunc)
-	http.ListenAndServe(":3000", mux)
+	r := mux.NewRouter()
+	r.HandleFunc("/", handlerFunc)
+	http.ListenAndServe(":3000", r)
 
 }
