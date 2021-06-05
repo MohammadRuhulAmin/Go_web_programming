@@ -12,16 +12,15 @@ func handlerFunc(w http.ResponseWriter, r *http.Request) {
 	} else if r.URL.Path == "/Contact" {
 		fmt.Fprint(w, "<p>Email Us : </p> <a href=\"facebook.com\" >Contact</a>  ") // linking ..a page
 	} else {
-		w.WriteHeader(http.StatusNotFound)
+		w.WriteHeader(http.StatusNotFound) 
 		fmt.Fprint(w, "<h3>Bad Request !</h3>")
 	}
-
 	fmt.Println(r.URL.Path)
 }
 
 func main() {
-
-	http.HandleFunc("/", handlerFunc)
-	http.ListenAndServe(":3000", nil)
+	mux := &http.ServeMux{}
+	mux.HandleFunc("/", handlerFunc)
+	http.ListenAndServe(":3000", mux)
 
 }
