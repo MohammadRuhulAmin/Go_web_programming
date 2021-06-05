@@ -6,11 +6,18 @@ import (
 )
 
 func handlerFunc(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html") // text/plain
-	fmt.Fprint(w, "<h1>Welcome to___ my super Awesome Tutorial</h1>")
-	fmt.Println(r.URL.Path)
-	fmt.Fprint(w,"<p>Email Us : </p> <a href=\"facebook.com\" >Contact</a>  ") // linking ..a page 
-}
+	w.Header().Set("Content-Type", "text/html") // text/plain 
+	if r.URL.Path == "/"{
+		fmt.Fprint(w, "<h1>Welcome to___ my super Awesome Tutorial</h1>")
+	}else if r.URL.Path == "/Contact"{
+		fmt.Fprint(w,"<p>Email Us : </p> <a href=\"facebook.com\" >Contact</a>  ") // linking ..a page 
+	}else{
+		fmt.Fprint(w ,"<h3>Bad Request !</h3>")
+	}
+	
+	fmt.Println(r.URL.Path) 
+	}
+	
 
 func main() {
 
